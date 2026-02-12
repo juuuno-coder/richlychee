@@ -59,6 +59,12 @@ def _normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 def _clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """결측값 처리 및 타입 변환."""
+    # 문자열이어야 하는 컬럼을 강제 변환 (엑셀에서 숫자로 읽히는 경우 대비)
+    str_force_cols = ["category_id", "seller_managed_code"]
+    for col in str_force_cols:
+        if col in df.columns:
+            df[col] = df[col].astype(str).replace("nan", "")
+
     # 문자열 컬럼의 NaN을 빈 문자열로 치환
     str_cols = df.select_dtypes(include=["object", "string"]).columns
     df[str_cols] = df[str_cols].fillna("")
