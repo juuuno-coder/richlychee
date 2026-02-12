@@ -1,0 +1,23 @@
+# 네이버 커머스 API 설정
+api:
+  base_url: "https://api.commerce.naver.com/external/v1"
+  token_url: "https://api.commerce.naver.com/external/v1/oauth2/token"
+  timeout: 30
+  max_retries: 3
+  retry_backoff_factor: 1.0
+
+# 레이트 리밋 설정
+rate_limit:
+  requests_per_second: 10
+  burst_max: 15
+
+# 대량 등록 설정
+registration:
+  batch_size: 50
+  stop_on_error: false
+  image_upload_timeout: 60
+
+# 출력 설정
+output:
+  report_dir: "output"
+  report_format: "xlsx"
