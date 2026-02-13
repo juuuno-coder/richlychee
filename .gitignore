@@ -20,6 +20,7 @@ env/
 
 # Secrets
 .env
+.env.local
 
 # OS
 Thumbs.db
@@ -29,3 +30,19 @@ Desktop.ini
 # Output
 output/
 *.log
+
+# Backend
+backend/uploads/
+backend/alembic/versions/*.py
+!backend/alembic/versions/.gitkeep
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Docker
+.docker/
+
+# Misc
+nul
