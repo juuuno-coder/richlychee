@@ -1,0 +1,41 @@
+# 환경 변수 (절대 커밋 금지)
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env.local
+
+# Claude
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+dist/
+*.egg-info/
+
+# Node
+node_modules/
+frontend/.next/
+frontend/out/
+
+# 업로드 파일
+uploads/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 테스트
+.pytest_cache/
+htmlcov/
+.coverage
+.claude/

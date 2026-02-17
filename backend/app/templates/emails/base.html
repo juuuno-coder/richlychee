@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Richlychee{% endblock %}</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .header .logo {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .content h2 {
+            margin-top: 0;
+            color: #1f2937;
+            font-size: 22px;
+        }
+        .content p {
+            margin: 15px 0;
+            color: #4b5563;
+        }
+        .info-box {
+            background-color: #f9fafb;
+            border-left: 4px solid #dc2626;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .info-box h3 {
+            margin: 0 0 10px 0;
+            color: #1f2937;
+            font-size: 16px;
+        }
+        .info-box p {
+            margin: 5px 0;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #dc2626;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+        .button:hover {
+            background-color: #b91c1c;
+        }
+        .footer {
+            background-color: #f9fafb;
+            padding: 25px 30px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 13px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .footer a {
+            color: #dc2626;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🍒</div>
+            <h1>Richlychee</h1>
+        </div>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="footer">
+            <p>본 메일은 발신 전용입니다. 문의사항은 <a href="mailto:support@richlychee.com">support@richlychee.com</a>으로 연락주세요.</p>
+            <p>&copy; 2026 Richlychee. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

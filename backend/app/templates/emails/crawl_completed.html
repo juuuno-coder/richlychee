@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}크롤링 완료 - Richlychee{% endblock %}
+
+{% block content %}
+<h2>안녕하세요, {{ user_name }}님!</h2>
+<p>요청하신 크롤링 작업이 성공적으로 완료되었습니다.</p>
+
+<div class="info-box">
+    <h3>크롤링 결과</h3>
+    <p><strong>작업 ID:</strong> {{ crawl_job_id }}</p>
+    <p><strong>대상 URL:</strong> {{ target_url }}</p>
+    <p><strong>수집 상품 수:</strong> {{ success_count }} / {{ total_items }}개</p>
+</div>
+
+<p>수집된 상품은 크롤링 페이지에서 확인하실 수 있습니다.</p>
+
+<a href="https://richlychee.com/crawl/{{ crawl_job_id }}" class="button">결과 보기</a>
+
+<p style="margin-top: 30px; color: #6b7280; font-size: 14px;">
+    가격 조정 후 바로 네이버 스마트스토어에 등록할 수 있습니다.
+</p>
+{% endblock %}

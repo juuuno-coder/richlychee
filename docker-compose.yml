@@ -41,8 +41,18 @@ services:
       CELERY_RESULT_BACKEND: redis://redis:6379/2
       SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY:-change-me-32-byte-key-for-aes256}
-      CORS_ORIGINS: '["http://localhost:3000"]'
+      CORS_ORIGINS: '["http://localhost:3200"]'
       DEBUG: "true"
+      # PortOne v2
+      PORTONE_API_KEY: ${PORTONE_API_KEY:-}
+      PORTONE_API_SECRET: ${PORTONE_API_SECRET:-}
+      # Email
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      FROM_EMAIL: ${FROM_EMAIL:-noreply@richlychee.com}
+      NOTIFICATION_EMAIL: ${NOTIFICATION_EMAIL:-juuuno@naver.com}
     volumes:
       - uploads:/app/uploads
     depends_on:
@@ -64,6 +74,13 @@ services:
       CELERY_RESULT_BACKEND: redis://redis:6379/2
       SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY:-change-me-32-byte-key-for-aes256}
+      # Email (Celery 워커에서도 필요)
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      FROM_EMAIL: ${FROM_EMAIL:-noreply@richlychee.com}
+      NOTIFICATION_EMAIL: ${NOTIFICATION_EMAIL:-juuuno@naver.com}
     volumes:
       - uploads:/app/uploads
     depends_on:
@@ -78,12 +95,15 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "3001:3000"
+      - "3200:3000"
     environment:
       NEXT_PUBLIC_API_URL: http://backend:8000
-      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_URL: http://localhost:3200
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-change-me-nextauth-secret}
       DATABASE_URL: postgresql://richlychee:${DB_PASSWORD:-richlychee}@db:5432/richlychee
+      # PortOne v2
+      NEXT_PUBLIC_PORTONE_STORE_ID: ${NEXT_PUBLIC_PORTONE_STORE_ID:-}
+      NEXT_PUBLIC_PORTONE_CHANNEL_KEY: ${NEXT_PUBLIC_PORTONE_CHANNEL_KEY:-}
     depends_on:
       - backend
 

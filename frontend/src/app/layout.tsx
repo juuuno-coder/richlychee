@@ -17,6 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+      </head>
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>

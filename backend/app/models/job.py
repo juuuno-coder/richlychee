@@ -42,6 +42,10 @@ class Job(Base):
     stored_file_path: Mapped[str] = mapped_column(String(500))
     dry_run: Mapped[bool] = mapped_column(Boolean, default=False)
 
+    # 크롤링 데이터 지원
+    source_type: Mapped[str] = mapped_column(String(20), default="file")  # 'file' | 'crawled'
+    crawled_product_ids: Mapped[list | None] = mapped_column(JSON, nullable=True)  # CrawledProduct UUIDs
+
     total_rows: Mapped[int] = mapped_column(Integer, default=0)
     processed_rows: Mapped[int] = mapped_column(Integer, default=0)
     success_count: Mapped[int] = mapped_column(Integer, default=0)

@@ -71,18 +71,49 @@ def run_registration(self, job_id: str):
         client = NaverCommerceClient(settings, auth)
 
         try:
-            # 파일 읽기
-            df = read_file(job.stored_file_path)
+            # 데이터 소스에 따라 처리
+            if job.source_type == "file":
+                # 파일 읽기
+                df = read_file(job.stored_file_path)
+            elif job.source_type == "crawled":
+                # 크롤링된 데이터 읽기
+                import pandas as pd
+                from app.models.crawled_product import CrawledProduct
+
+                product_ids = [uuid.UUID(pid) for pid in job.crawled_product_ids]
+                products_result = db.execute(
+                    select(CrawledProduct).where(CrawledProduct.id.in_(product_ids))
+                )
+                products = products_result.scalars().all()
+
+                # CrawledProduct → DataFrame 변환
+                data = []
+                for p in products:
+                    data.append({
+                        "product_name": p.product_name or p.original_title,
+                        "sale_price": p.sale_price or p.original_price,
+                        "category_id": p.category_id or "",
+                        "stock_quantity": p.stock_quantity,
+                        "detail_content": p.detail_content or "",
+                        "representative_image": p.representative_image or "",
+                        "optional_images": p.optional_images or "",
+                    })
+                df = pd.DataFrame(data)
+            else:
+                raise ValueError(f"지원하지 않는 소스 타입: {job.source_type}")
+
             job.total_rows = len(df)
             job.status = JobStatus.UPLOADING
             job.started_at = datetime.now(UTC)
             db.commit()
 
-            # 이미지 업로드
-            local_images = collect_local_images(df)
+            # 이미지 업로드 (파일 소스만 해당)
+            local_images = []
             image_url_map = {}
-            if local_images:
-                image_url_map = upload_images_batch(client, local_images)
+            if job.source_type == "file":
+                local_images = collect_local_images(df)
+                if local_images:
+                    image_url_map = upload_images_batch(client, local_images)
 
             # 상품 등록
             job.status = JobStatus.RUNNING
@@ -107,6 +138,7 @@ def run_registration(self, job_id: str):
                             success=True,
                             naver_product_id="DRY_RUN",
                         )
+                        naver_product_id = "DRY_RUN"
                     else:
                         api_resp = register_product(client, payload)
                         product_id = str(
@@ -121,7 +153,17 @@ def run_registration(self, job_id: str):
                             naver_product_id=product_id,
                             api_response=api_resp,
                         )
+                        naver_product_id = product_id
+
                     job.success_count += 1
+
+                    # 크롤링 소스인 경우 CrawledProduct 업데이트
+                    if job.source_type == "crawled" and idx < len(products):
+                        crawled_product = products[idx]
+                        crawled_product.is_registered = True
+                        crawled_product.job_id = job.id
+                        crawled_product.naver_product_id = naver_product_id
+                        db.add(crawled_product)
                 except Exception as e:
                     result = ProductResult(
                         job_id=job.id,
@@ -152,6 +194,38 @@ def run_registration(self, job_id: str):
                 job.status = JobStatus.COMPLETED if job.failure_count == 0 else JobStatus.COMPLETED
             job.finished_at = datetime.now(UTC)
             db.commit()
+
+            # 이메일 알림 발송
+            if job.status == JobStatus.COMPLETED:
+                try:
+                    from app.services.email_service import EmailService
+                    from app.models.user import User
+                    from app.core.config import get_app_settings
+
+                    settings = get_app_settings()
+                    email_service = EmailService(
+                        smtp_host=settings.SMTP_HOST,
+                        smtp_port=settings.SMTP_PORT,
+                        smtp_user=settings.SMTP_USER,
+                        smtp_password=settings.SMTP_PASSWORD,
+                        from_email=settings.FROM_EMAIL,
+                    )
+
+                    # 사용자 조회
+                    user = db.execute(
+                        select(User).where(User.id == job.user_id)
+                    ).scalar_one()
+
+                    # 등록 완료 알림 발송
+                    email_service.send_registration_completed(
+                        to_email=settings.NOTIFICATION_EMAIL,
+                        user_name=user.name,
+                        job_id=str(job.id),
+                        success_count=job.success_count,
+                        total_rows=job.total_rows,
+                    )
+                except Exception as email_error:
+                    print(f"이메일 발송 실패: {email_error}")
 
         except Exception as e:
             job.status = JobStatus.FAILED

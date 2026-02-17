@@ -9,14 +9,18 @@ import {
   Package,
   Settings,
   Cherry,
+  Globe,
+  CreditCard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/dashboard", label: "대시보드", icon: LayoutDashboard },
+  { href: "/crawl", label: "크롤링", icon: Globe },
   { href: "/jobs", label: "작업 관리", icon: ListTodo },
   { href: "/credentials", label: "API 자격증명", icon: KeyRound },
   { href: "/products", label: "등록 상품", icon: Package },
+  { href: "/subscription", label: "구독 요금제", icon: CreditCard },
   { href: "/settings", label: "설정", icon: Settings },
 ];
 

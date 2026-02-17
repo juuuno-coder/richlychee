@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}상품 등록 완료 - Richlychee{% endblock %}
+
+{% block content %}
+<h2>안녕하세요, {{ user_name }}님!</h2>
+<p>네이버 스마트스토어 상품 등록이 성공적으로 완료되었습니다.</p>
+
+<div class="info-box">
+    <h3>등록 결과</h3>
+    <p><strong>작업 ID:</strong> {{ job_id }}</p>
+    <p><strong>등록 성공:</strong> {{ success_count }}개</p>
+    <p><strong>전체 상품:</strong> {{ total_rows }}개</p>
+    <p><strong>성공률:</strong> {{ (success_count / total_rows * 100) | round(1) }}%</p>
+</div>
+
+<p>등록된 상품은 네이버 스마트스토어 판매자 센터에서 확인하실 수 있습니다.</p>
+
+<a href="https://richlychee.com/jobs/{{ job_id }}" class="button">상세 결과 보기</a>
+
+<p style="margin-top: 30px; color: #6b7280; font-size: 14px;">
+    일부 상품이 실패한 경우 작업 상세 페이지에서 오류 메시지를 확인하실 수 있습니다.
+</p>
+{% endblock %}

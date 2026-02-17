@@ -11,7 +11,20 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from app.core.database import Base
-from app.models import Job, NaverCredential, ProductResult, User  # noqa: F401
+from app.models import (  # noqa: F401
+    CrawlJob,
+    CrawledProduct,
+    CrawlPreset,
+    CrawlSchedule,
+    Job,
+    NaverCredential,
+    PriceAlert,
+    PriceHistory,
+    ProductResult,
+    SubscriptionPlan,
+    User,
+    UserSubscription,
+)
 
 config = context.config
 

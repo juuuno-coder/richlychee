@@ -36,3 +36,9 @@ class User(Base):
 
     credentials = relationship("NaverCredential", back_populates="user", cascade="all, delete")
     jobs = relationship("Job", back_populates="user", cascade="all, delete")
+    crawl_jobs = relationship("CrawlJob", back_populates="user", cascade="all, delete")
+    crawled_products = relationship("CrawledProduct", back_populates="user", cascade="all, delete")
+    crawl_schedules = relationship("CrawlSchedule", back_populates="user", cascade="all, delete")
+    price_alerts = relationship("PriceAlert", back_populates="user", cascade="all, delete")
+    subscription = relationship("UserSubscription", back_populates="user", uselist=False, cascade="all, delete")
+    payments = relationship("Payment", back_populates="user", cascade="all, delete")

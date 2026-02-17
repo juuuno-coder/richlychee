@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}결제 실패 - Richlychee{% endblock %}
+
+{% block content %}
+<h2>안녕하세요, {{ user_name }}님</h2>
+<p>죄송합니다. <strong>{{ plan_name }}</strong> 구독 결제 처리 중 오류가 발생했습니다.</p>
+
+<div class="info-box">
+    <h3>오류 정보</h3>
+    <p><strong>플랜:</strong> {{ plan_name }}</p>
+    <p><strong>오류 메시지:</strong> {{ error_message }}</p>
+</div>
+
+<p>다음 사항을 확인해주세요:</p>
+<ul>
+    <li>카드 정보가 정확한지 확인</li>
+    <li>카드 한도가 충분한지 확인</li>
+    <li>카드가 해외 결제 가능한지 확인</li>
+</ul>
+
+<a href="https://richlychee.com/subscription" class="button">다시 시도하기</a>
+
+<p style="margin-top: 30px; color: #6b7280; font-size: 14px;">
+    문제가 계속되면 고객 지원팀에 문의해주세요.
+</p>
+{% endblock %}

@@ -8,7 +8,20 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_app_settings
-from app.routers import auth, categories, credentials, files, jobs, products, users
+from app.routers import (
+    auth,
+    categories,
+    crawl_jobs,
+    crawled_products,
+    credentials,
+    files,
+    jobs,
+    payments,
+    products,
+    quick_crawl,
+    subscriptions,
+    users,
+)
 
 
 @asynccontextmanager
@@ -49,7 +62,12 @@ def create_app() -> FastAPI:
     app.include_router(auth.router, prefix=prefix)
     app.include_router(users.router, prefix=prefix)
     app.include_router(credentials.router, prefix=prefix)
+    app.include_router(subscriptions.router, prefix=prefix)
+    app.include_router(payments.router, prefix=prefix)
     app.include_router(jobs.router, prefix=prefix)
+    app.include_router(crawl_jobs.router, prefix=prefix)
+    app.include_router(crawled_products.router, prefix=prefix)
+    app.include_router(quick_crawl.router, prefix=prefix)
     app.include_router(files.router, prefix=prefix)
     app.include_router(categories.router, prefix=prefix)
     app.include_router(products.router, prefix=prefix)

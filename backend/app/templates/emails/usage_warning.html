@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}사용량 경고 - Richlychee{% endblock %}
+
+{% block content %}
+<h2>안녕하세요, {{ user_name }}님</h2>
+<p>현재 구독 플랜의 <strong>{{ feature_name }}</strong> 사용량이 <strong>{{ usage_percent }}%</strong>에 도달했습니다.</p>
+
+<div class="info-box">
+    <h3>사용량 정보</h3>
+    <p><strong>기능:</strong> {{ feature_name }}</p>
+    <p><strong>현재 사용량:</strong> {{ current_usage }} / {{ limit }}</p>
+    <p><strong>사용률:</strong> {{ usage_percent }}%</p>
+</div>
+
+<p>한도에 도달하면 해당 기능을 더 이상 사용하실 수 없습니다.</p>
+
+<p>플랜을 업그레이드하여 더 많은 사용량을 확보하세요.</p>
+
+<a href="https://richlychee.com/subscription" class="button">플랜 업그레이드</a>
+
+<p style="margin-top: 30px; color: #6b7280; font-size: 14px;">
+    사용량은 매월 1일 00:00에 초기화됩니다.
+</p>
+{% endblock %}

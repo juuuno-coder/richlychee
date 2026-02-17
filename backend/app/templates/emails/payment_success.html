@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}결제 완료 - Richlychee{% endblock %}
+
+{% block content %}
+<h2>안녕하세요, {{ user_name }}님!</h2>
+<p>Richlychee <strong>{{ plan_name }}</strong> 구독 결제가 성공적으로 완료되었습니다.</p>
+
+<div class="info-box">
+    <h3>결제 정보</h3>
+    <p><strong>구독 플랜:</strong> {{ plan_name }}</p>
+    <p><strong>결제 금액:</strong> {{ amount }}</p>
+    <p><strong>결제 주기:</strong> {{ billing_cycle }}</p>
+    <p><strong>결제 일시:</strong> {{ payment_date }}</p>
+</div>
+
+<p>이제 {{ plan_name }} 플랜의 모든 기능을 사용하실 수 있습니다.</p>
+
+<a href="https://richlychee.com/dashboard" class="button">대시보드로 이동</a>
+
+<p style="margin-top: 30px; color: #6b7280; font-size: 14px;">
+    결제 내역은 대시보드의 구독 관리 페이지에서 확인하실 수 있습니다.
+</p>
+{% endblock %}

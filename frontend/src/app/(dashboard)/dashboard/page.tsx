@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatsCards } from "@/components/dashboard/stats-cards";
+import UsageStats from "@/components/dashboard/usage-stats";
 import { JobTable } from "@/components/jobs/job-table";
 import { EmptyState } from "@/components/common/empty-state";
 import { PageLoading } from "@/components/common/loading-spinner";
@@ -26,7 +27,12 @@ export default function DashboardPage() {
         </Link>
       </div>
 
-      <StatsCards jobs={jobs} />
+      <div className="grid gap-6 md:grid-cols-2">
+        <div>
+          <StatsCards jobs={jobs} />
+        </div>
+        <UsageStats />
+      </div>
 
       <Card>
         <CardHeader>

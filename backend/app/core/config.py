@@ -41,6 +41,18 @@ class AppSettings(BaseSettings):
     # App
     debug: bool = False
 
+    # PortOne v2
+    PORTONE_API_KEY: str = ""
+    PORTONE_API_SECRET: str = ""
+
+    # Email (SMTP)
+    SMTP_HOST: str = "smtp.gmail.com"
+    SMTP_PORT: int = 587
+    SMTP_USER: str = ""
+    SMTP_PASSWORD: str = ""
+    FROM_EMAIL: str = "noreply@richlychee.com"
+    NOTIFICATION_EMAIL: str = "juuuno@naver.com"  # 모든 알림 수신 이메일
+
 
 _settings: AppSettings | None = None
 
@@ -51,3 +63,7 @@ def get_app_settings() -> AppSettings:
     if _settings is None:
         _settings = AppSettings()
     return _settings
+
+
+# Alias for compatibility
+get_settings = get_app_settings
