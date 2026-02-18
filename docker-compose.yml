@@ -97,7 +97,7 @@ services:
     ports:
       - "3200:3000"
     environment:
-      NEXT_PUBLIC_API_URL: http://backend:8000
+      BACKEND_URL: http://backend:8000
       NEXTAUTH_URL: http://localhost:3200
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-change-me-nextauth-secret}
       DATABASE_URL: postgresql://richlychee:${DB_PASSWORD:-richlychee}@db:5432/richlychee

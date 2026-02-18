@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Check, Zap, TrendingUp } from "lucide-react";
-import LoadingSpinner from "@/components/common/loading-spinner";
+import { LoadingSpinner } from "@/components/common/loading-spinner";
 import { PaymentDialog } from "@/components/payment/payment-dialog";
 
 export default function SubscriptionPage() {

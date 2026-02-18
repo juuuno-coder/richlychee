@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, Download, TrendingUp, Package } from "lucide-react";
-import LoadingSpinner from "@/components/common/loading-spinner";
+import { LoadingSpinner } from "@/components/common/loading-spinner";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export default function CrawlJobDetailPage() {

@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Globe, Play, X, Trash2, ExternalLink, Search } from "lucide-react";
-import LoadingSpinner from "@/components/common/loading-spinner";
+import { LoadingSpinner } from "@/components/common/loading-spinner";
 import { useRouter } from "next/navigation";
 
 export default function CrawlPage() {

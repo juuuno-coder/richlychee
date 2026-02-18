@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import LoadingSpinner from "@/components/common/loading-spinner";
+import { LoadingSpinner } from "@/components/common/loading-spinner";
 import { CreditCard } from "lucide-react";
 
 declare global {
